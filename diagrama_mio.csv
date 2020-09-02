@@ -1,0 +1,49 @@
+id,Nombre,Biblioteca de figuras,ID de página,Contenido por,Grupo,Origen de línea,Destino de la línea,Flecha de origen,Flecha de destino,Área de texto 1
+1,Página,,,,,,,,,Página 1
+2,Terminador,Figuras de diagramas de flujo,1,,,,,,,Tiene
+3,Proceso,Figuras de diagramas de flujo,1,,,,,,,Info_Trabajo
+4,Proceso,Figuras de diagramas de flujo,1,,,,,,,Info_Personal
+5,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+6,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,Titulo
+7,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+8,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,Titulo
+9,Terminador,Figuras de diagramas de flujo,1,,,,,,,tiene
+10,Terminador,Figuras de diagramas de flujo,1,,,,,,,tiene
+11,Proceso,Figuras de diagramas de flujo,1,,,,,,,Nombre
+12,Proceso,Figuras de diagramas de flujo,1,,,,,,,Direccion
+13,Proceso,Figuras de diagramas de flujo,1,,,,,,,Primer_Nombre
+14,Proceso,Figuras de diagramas de flujo,1,,,,,,,Apellido
+15,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+16,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+17,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+18,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+19,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,input
+20,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,input
+21,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,input
+22,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,input
+23,Objeto,UML,1,,,,,,,Formuilario
+24,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
+25,Cinta de papel,Figuras de diagramas de flujo,1,,,,,,,Formulario
+26,Línea,,1,,,23,2,None,Arrow,
+27,Línea,,1,,,2,3,None,Arrow,
+28,Línea,,1,,,3,5,None,Arrow,
+29,Línea,,1,,,5,6,None,Arrow,
+30,Línea,,1,,,4,7,None,Arrow,
+31,Línea,,1,,,7,8,None,Arrow,
+32,Línea,,1,,,4,10,None,Arrow,
+33,Línea,,1,,,3,9,None,Arrow,
+34,Línea,,1,,,9,11,None,Arrow,
+35,Línea,,1,,,10,13,None,Arrow,
+36,Línea,,1,,,11,15,None,Arrow,
+37,Línea,,1,,,12,16,None,Arrow,
+38,Línea,,1,,,13,17,None,Arrow,
+39,Línea,,1,,,14,18,None,Arrow,
+40,Línea,,1,,,17,21,None,Arrow,
+41,Línea,,1,,,18,22,None,Arrow,
+42,Línea,,1,,,16,20,None,Arrow,
+43,Línea,,1,,,15,19,None,Arrow,
+44,Línea,,1,,,23,24,None,Arrow,
+45,Línea,,1,,,24,25,None,Arrow,
+46,Línea,,1,,,9,12,None,Arrow,
+47,Línea,,1,,,10,14,None,Arrow,
+48,Línea,,1,,,2,4,None,Arrow,
