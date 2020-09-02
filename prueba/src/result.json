@@ -1,0 +1,5 @@
+[
+  "Formuilario",
+  ["Info_Trabajo", "Nombre es input", "Direccion es input"],
+  ["Info_Personal", "Primer_Nombre es input", "Apellido es input"]
+]
