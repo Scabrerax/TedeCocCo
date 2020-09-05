@@ -3,7 +3,7 @@ let objetos = [];
 let lineas = [];
 
 function crearArray(pathToCsv) {
-  let array = fs.readFileSync(pathToCsv).toString().split("\n");
+  let array = fs.readFileSync(pathToCsv).toString().split("\r\n");
   let array2 = [];
   for (let i = 0; i < array.length; i++) {
     let separado = array[i].split(",");
