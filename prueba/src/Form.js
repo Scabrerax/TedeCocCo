@@ -16,14 +16,49 @@ export const Form = ({ data }) => {
               <h3>{subTitle.replace("_", " ")}</h3>
               {elements.map((element) => {
                 const label = element.split(" ")[0].replace("_", " ");
-                const type = element[0].split(" ")[2];
+                //const type = element.split(" ")[2];
 
-                return (
-                  <BootstrapForm.Group key={subTitle}>
-                    <FormLabel>{label}</FormLabel>
-                    <BootstrapForm.Control as={type} />
-                  </BootstrapForm.Group>
-                );
+                switch (type) {
+                  case "input": {
+                    return (
+                      <BootstrapForm.Group key={label}>
+                        <FormLabel>{label}</FormLabel>
+                        <BootstrapForm.Control type="text" />
+                      </BootstrapForm.Group>
+                    );
+                  }
+                  case "password": {
+                    return (
+                      <BootstrapForm.Group key={label}>
+                        <FormLabel>{label}</FormLabel>
+                        <BootstrapForm.Control type="password" placeholder="Password" />n
+                      </BootstrapForm.Group>
+                    );
+                  }
+                  case "mail": {
+                    return (
+                      <BootstrapForm.Group key={label}>
+                        <FormLabel>{label}</FormLabel>
+                        <BootstrapForm.Control type="email" placeholder="name@example.com" />
+                      </BootstrapForm.Group>
+                    );
+                  }
+                  case "option": {
+                    return (
+                      <BootstrapForm.Group key={label}>
+                        <FormLabel>{label}</FormLabel>
+                        <Form.Control as="select">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </Form.Control>
+                      </BootstrapForm.Group>
+                    );
+                  }
+                  default:
+                    return <React.Fragment key={label}></React.Fragment>;
+                }
               })}
             </Fragment>
           );
