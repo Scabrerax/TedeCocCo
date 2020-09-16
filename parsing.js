@@ -3,7 +3,7 @@ let objetos = [];
 let lineas = [];
 
 function crearArray(pathToCsv) {
-  let array = fs.readFileSync(pathToCsv).toString().split("\n");
+  let array = fs.readFileSync(pathToCsv).toString().split(/\r?\n/);
   let array2 = [];
   for (let i = 0; i < array.length; i++) {
     let separado = array[i].split(",");
@@ -37,29 +37,75 @@ function sacarlineas(indice, lineas) {
 }
 
 function sacarComponentes(indice, objetos, listaLineas) {
+  
   let resultado = [];
   let id = parseInt(objetos[parseInt(indice)][0]);
-
-  let nombreComponente = objetos[id][10];
-  let hijos = [];
-  let listaLineas1 = sacarlineas(id, listaLineas);
-  for (let valor of listaLineas1) {
-    hijos.push(sacarlineas(valor, listaLineas));
+  if (objetos[id][10] === "select" || objetos[id][10] === "radius" || objetos[id][10] === "checkbox") {
+    let nombreComponente = "";
+    let hijos = [];
+    let listaLineas1 = sacarlineas(id, listaLineas);
+    for (let valor of listaLineas1) {
+      hijos.push(sacarlineas(valor, listaLineas));
+    }
+    
+    let select = false
+    for (let i = 0; i < listaLineas1.length; i++) {
+      let respuesta =
+        nombreComponente  + objetos[parseInt(listaLineas1[i])][10];
+      for (let j = 0; j < hijos[i].length; j++) {
+        respuesta += " " + objetos[parseInt(hijos[i][j])][10];
+        if (objetos[parseInt(hijos[i][j])][10] === "select" || objetos[parseInt(hijos[i][j])][10] === "radius" || objetos[parseInt(hijos[i][j])][10] === "checkbox"){
+          select = true
+        }
+      }
+      if (respuesta.length !== 0) {
+        resultado.push(respuesta);
+      } else {
+        continue;
+      }
+    }
+    if (select === true){
+      let ubicacion = hijos[0][0] 
+      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas)
+      
+      return [resultado + " " + hijosSelect]
+    }
+    return resultado;
+  } else {
+    let nombreComponente = objetos[id][10];
+    let hijos = [];
+    let listaLineas1 = sacarlineas(id, listaLineas);
+    for (let valor of listaLineas1) {
+      hijos.push(sacarlineas(valor, listaLineas));
+    }
+    
+    let select = false
+    for (let i = 0; i < listaLineas1.length; i++) {
+      let respuesta =
+        nombreComponente + " " + objetos[parseInt(listaLineas1[i])][10];
+      for (let j = 0; j < hijos[i].length; j++) {
+        respuesta += " " + objetos[parseInt(hijos[i][j])][10];
+        if (objetos[parseInt(hijos[i][j])][10] === "select" || objetos[parseInt(hijos[i][j])][10] === "radius" || objetos[parseInt(hijos[i][j])][10] === "checkbox"){
+          select = true
+        }
+      }
+      if (respuesta.length !== 0) {
+        resultado.push(respuesta);
+      } else {
+        continue;
+      }
+    }
+    if (select === true){
+      let ubicacion = hijos[0][0] 
+      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas)
+      
+      return [resultado + " " + hijosSelect]
+    }
+    return resultado;
   }
 
-  for (let i = 0; i < listaLineas1.length; i++) {
-    let respuesta =
-      nombreComponente + " " + objetos[parseInt(listaLineas1[i])][10];
-    for (let j = 0; j < hijos[i].length; j++) {
-      respuesta += " " + objetos[parseInt(hijos[i][j])][10];
-    }
-    if (respuesta.length !== 0) {
-      resultado.push(respuesta);
-    } else {
-      continue;
-    }
-  }
-  return resultado;
+  
+  
 }
 
 function buscar(texto, array) {
@@ -120,7 +166,7 @@ const parseCSV = (pathToCsv) => {
   separar(archivo, objetos, lineas);
 
   let resultado = [];
-
+  
   for (let valor of objetos) {
     if (valor[1] === "Objeto" || valor[1] === "Proceso") {
       let res = sacarComponentes(valor[0], objetos, lineas);
@@ -129,7 +175,7 @@ const parseCSV = (pathToCsv) => {
       }
     }
   }
-
+  
   return ordenar(resultado);
 };
 
