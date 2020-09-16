@@ -1,0 +1,40 @@
+{
+  "name": "salud-ocupacional-back",
+  "version": "1.0.0",
+  "description": "Proyecto de salud ocupacional de requisistemas ",
+  "main": "index.js",
+  "scripts": {
+    "start:back": "nodemon server/index.js",
+    "start:front": "serve ./public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumarinr/salud-ocupacional-back.git"
+  },
+  "keywords": [
+    "node",
+    "mongoose"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jumarinr/salud-ocupacional-back/issues"
+  },
+  "homepage": "https://github.com/jumarinr/salud-ocupacional-back#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-mongo": "^3.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.4",
+    "nodemon": "^1.19.3",
+    "serve": "^11.3.2",
+    "shelljs": "^0.8.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "App/*/**"
+    ]
+  }
+}

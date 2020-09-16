@@ -1,5 +1,6 @@
-/prueba/node_modules
-/prueba/.env
-/prueba/package-lock.json
-/prueba/src/config.json
+/App/node_modules
+/App/package-lock.json
+/App/src/config.json
+/node_modules
+/package-lock.json
 .DS_Store

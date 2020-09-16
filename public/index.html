@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+  </head>
+  <body>
+    <h2>Suba el codigo CSV a convertir</h2>
+    <div>
+      <input id="input" type="file" />
+    </div>
+
+    <script>
+      const input = document.querySelector("input");
+
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.readAsText(file);
+        reader.onload = (event) => {
+          const fileAsText = event.target.result;
+
+          fetch("http://localhost:9000/parsing", {
+            method: "put",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ file: fileAsText }),
+          })
+            .then((res) => res.json())
+            .then((res) => console.log(res));
+        };
+      });
+    </script>
+  </body>
+</html>

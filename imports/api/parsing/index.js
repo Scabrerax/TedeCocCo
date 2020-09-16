@@ -1,9 +1,13 @@
 const fs = require("fs");
+const express = require("express");
+const router = express.Router();
+const shell = require("shelljs");
+
 let objetos = [];
 let lineas = [];
 
-function crearArray(pathToCsv) {
-  let array = fs.readFileSync(pathToCsv).toString().split(/\r?\n/);
+function crearArray(csvAsText) {
+  let array = csvAsText.split(/\r?\n/);
   let array2 = [];
   for (let i = 0; i < array.length; i++) {
     let separado = array[i].split(",");
@@ -37,25 +41,31 @@ function sacarlineas(indice, lineas) {
 }
 
 function sacarComponentes(indice, objetos, listaLineas) {
-  
   let resultado = [];
   let id = parseInt(objetos[parseInt(indice)][0]);
-  if (objetos[id][10] === "select" || objetos[id][10] === "radius" || objetos[id][10] === "checkbox") {
+  if (
+    objetos[id][10] === "select" ||
+    objetos[id][10] === "radio" ||
+    objetos[id][10] === "checkbox"
+  ) {
     let nombreComponente = "";
     let hijos = [];
     let listaLineas1 = sacarlineas(id, listaLineas);
     for (let valor of listaLineas1) {
       hijos.push(sacarlineas(valor, listaLineas));
     }
-    
-    let select = false
+
+    let select = false;
     for (let i = 0; i < listaLineas1.length; i++) {
-      let respuesta =
-        nombreComponente  + objetos[parseInt(listaLineas1[i])][10];
+      let respuesta = nombreComponente + objetos[parseInt(listaLineas1[i])][10];
       for (let j = 0; j < hijos[i].length; j++) {
         respuesta += " " + objetos[parseInt(hijos[i][j])][10];
-        if (objetos[parseInt(hijos[i][j])][10] === "select" || objetos[parseInt(hijos[i][j])][10] === "radius" || objetos[parseInt(hijos[i][j])][10] === "checkbox"){
-          select = true
+        if (
+          objetos[parseInt(hijos[i][j])][10] === "select" ||
+          objetos[parseInt(hijos[i][j])][10] === "radio" ||
+          objetos[parseInt(hijos[i][j])][10] === "checkbox"
+        ) {
+          select = true;
         }
       }
       if (respuesta.length !== 0) {
@@ -64,11 +74,11 @@ function sacarComponentes(indice, objetos, listaLineas) {
         continue;
       }
     }
-    if (select === true){
-      let ubicacion = hijos[0][0] 
-      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas)
-      
-      return [resultado + " " + hijosSelect]
+    if (select === true) {
+      let ubicacion = hijos[0][0];
+      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas);
+
+      return [resultado + " " + hijosSelect];
     }
     return resultado;
   } else {
@@ -78,15 +88,19 @@ function sacarComponentes(indice, objetos, listaLineas) {
     for (let valor of listaLineas1) {
       hijos.push(sacarlineas(valor, listaLineas));
     }
-    
-    let select = false
+
+    let select = false;
     for (let i = 0; i < listaLineas1.length; i++) {
       let respuesta =
         nombreComponente + " " + objetos[parseInt(listaLineas1[i])][10];
       for (let j = 0; j < hijos[i].length; j++) {
         respuesta += " " + objetos[parseInt(hijos[i][j])][10];
-        if (objetos[parseInt(hijos[i][j])][10] === "select" || objetos[parseInt(hijos[i][j])][10] === "radius" || objetos[parseInt(hijos[i][j])][10] === "checkbox"){
-          select = true
+        if (
+          objetos[parseInt(hijos[i][j])][10] === "select" ||
+          objetos[parseInt(hijos[i][j])][10] === "radio" ||
+          objetos[parseInt(hijos[i][j])][10] === "checkbox"
+        ) {
+          select = true;
         }
       }
       if (respuesta.length !== 0) {
@@ -95,17 +109,14 @@ function sacarComponentes(indice, objetos, listaLineas) {
         continue;
       }
     }
-    if (select === true){
-      let ubicacion = hijos[0][0] 
-      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas)
-      
-      return [resultado + " " + hijosSelect]
+    if (select === true) {
+      let ubicacion = hijos[0][0];
+      hijosSelect = sacarComponentes(parseInt(ubicacion), objetos, listaLineas);
+
+      return [resultado + " " + hijosSelect];
     }
     return resultado;
   }
-
-  
-  
 }
 
 function buscar(texto, array) {
@@ -161,12 +172,12 @@ function ordenar(array) {
   return ordenado;
 }
 
-const parseCSV = (pathToCsv) => {
-  let archivo = crearArray(pathToCsv);
+const parseCSV = (csvAsText) => {
+  let archivo = crearArray(csvAsText);
   separar(archivo, objetos, lineas);
 
   let resultado = [];
-  
+
   for (let valor of objetos) {
     if (valor[1] === "Objeto" || valor[1] === "Proceso") {
       let res = sacarComponentes(valor[0], objetos, lineas);
@@ -175,10 +186,19 @@ const parseCSV = (pathToCsv) => {
       }
     }
   }
-  
+
   return ordenar(resultado);
 };
 
-const result = JSON.stringify(parseCSV("./diagrama_prueba.csv"));
+router.put("/", (req, res) => {
+  const file = req.body.file;
+  res.json({ response: "ERES LA VERGA" });
+  const result = JSON.stringify(parseCSV(file));
+  fs.writeFileSync("./App/src/config.json", result);
+  shell.cd("./App");
+  shell.exec("npm i");
+  shell.exec("npm start");
+  shell.exit(0);
+});
 
-fs.writeFileSync("./prueba/src/config.json", result);
+module.exports = router;

@@ -17,7 +17,7 @@ id,Nombre,Biblioteca de figuras,ID de página,Contenido por,Grupo,Origen de lín
 16,Terminador,Figuras de diagramas de flujo,1,,,,,,,tiene
 17,Datos (E/S),Figuras de diagramas de flujo,1,,,,,,,es
 18,Proceso,Figuras de diagramas de flujo,1,,,,,,,select
-19,Proceso,Figuras de diagramas de flujo,1,,,,,,,radius
+19,Proceso,Figuras de diagramas de flujo,1,,,,,,,radio
 20,Proceso,Figuras de diagramas de flujo,1,,,,,,,checkbox
 21,Terminador,Figuras de diagramas de flujo,1,,,,,,,tiene
 22,Proceso,Figuras de diagramas de flujo,1,,,,,,,belgica
