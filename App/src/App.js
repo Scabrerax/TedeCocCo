@@ -1,10 +1,20 @@
 import React from "react";
 import { Form } from "./Form";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import data from "./config.json";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
 export const App = () => (
-  <Container>
-    <Form data={data} />
-  </Container>
+  <div>
+    <Container>
+      <Row>
+        <Header />
+      </Row>
+      <Row>
+        <Form data={data} />
+      </Row>
+    </Container>
+    <Footer />
+  </div>
 );
