@@ -1,10 +1,11 @@
 body {
-    background: #023974;
+    background: linear-gradient(to right, #27282c, #04243a);
 }
 
 .upload {
     color: white;
 }
+
 .center {
     margin: 0;
     position: absolute;
@@ -12,4 +13,13 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+input[type=”file”]#input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
