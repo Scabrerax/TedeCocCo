@@ -197,7 +197,6 @@ router.put("/", (req, res) => {
   fs.writeFileSync("./App/src/config.json", result);
   shell.cd("./App");
   shell.exec("npm i");
-  shell.exec("npm install reactstrap");
   shell.exec("npm start");
   shell.exit(0);
 });
