@@ -4,15 +4,8 @@ body {
 
 .upload {
     color: white;
-}
-
-.center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    position: relative;
+    transform: translate(0, 300%);
 }
 
 input[type=”file”]#input {
