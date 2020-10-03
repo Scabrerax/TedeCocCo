@@ -1,5 +1,6 @@
 /App/node_modules
 /App/package-lock.json
+/App/build
 /App/src/config.json
 /node_modules
 /package-lock.json
