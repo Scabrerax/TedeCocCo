@@ -196,9 +196,7 @@ router.put("/", (req, res) => {
   const result = JSON.stringify(parseCSV(file));
   fs.writeFileSync("./App/src/config.json", result);
   shell.cd("./App");
-  shell.exec("npm i");
-  shell.exec("npm start");
-  shell.exit(0);
+  shell.exec("npm run start", { async: true });
 });
 
 module.exports = router;

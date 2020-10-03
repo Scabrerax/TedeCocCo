@@ -32,7 +32,6 @@ export const Form = ({ data }) => {
   }
 
   function handleChange(event) {
-    console.log(event.target.name);
     setState({ [event.target.name]: event.target.value });
   }
   function handleCheckboxChange(event) {

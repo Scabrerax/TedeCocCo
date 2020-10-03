@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 var serviceAccount = require("./firebase-key.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://tedecoco-forms.firebaseio.com/",
+  databaseURL: "https://tedecoco-ff7a7.firebaseio.com/",
 });
 const db = admin.database();
 

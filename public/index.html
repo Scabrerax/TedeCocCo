@@ -1,39 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="upload text-center my-auto">
     <h2>Suba el codigo CSV a convertir</h2>
-    <div>
-      <input id="input" type="file" />
+    <div class="file">
+      <i class="fa fa-upload" aria-hidden="true"></i>
+      <input type="file" name="resume" id="input">
     </div>
+  </div>
+  <footer class="page-footer text-center py-3 bg-dark text-white-50">
+    <small>Copyright &copy; Profe Ponganos 5</small>
+  </footer>
+</body>
+<script>
+  const input = document.querySelector("input");
 
-    <script>
-      const input = document.querySelector("input");
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    const reader = new FileReader();
 
-      input.addEventListener("change", () => {
-        const file = input.files[0];
-        const reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (event) => {
+      const fileAsText = event.target.result;
 
-        reader.readAsText(file);
-        reader.onload = (event) => {
-          const fileAsText = event.target.result;
+      fetch("http://localhost:9000/parsing", {
+        method: "put",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ file: fileAsText }),
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res));
+    };
+  });
+</script>
+<script>
+  const input = document.querySelector("input");
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    const reader = new FileReader();
 
-          fetch("http://localhost:9000/parsing", {
-            method: "put",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ file: fileAsText }),
-          })
-            .then((res) => res.json())
-            .then((res) => console.log(res));
-        };
-      });
-    </script>
-  </body>
+    reader.readAsText(file);
+    reader.onload = (event) => {
+      const fileAsText = event.target.result;
+
+      fetch("http://localhost:9000/parsing", {
+        method: "put",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ file: fileAsText }),
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res));
+    };
+  });
+</script>
+</body>
+
 </html>
