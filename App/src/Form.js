@@ -8,42 +8,25 @@ import {
   CardSubtitle,
   CardBody,
 } from "reactstrap";
-import { useSetState } from "./useSetState";
 import "./Form.css";
+import { useForm } from "react-hook-form";
 
 export const Form = ({ data }) => {
   const [title, ...subSections] = data;
-  const [state, setState] = useSetState({});
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    // This will be the form put request.
+  const { handleSubmit, register } = useForm();
+  const onSubmit = async (data) => {
     fetch("http://localhost:9000/submit", {
       method: "put",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: title, fields: state }),
+      body: JSON.stringify({ name: title, fields: data }),
     })
       .then((res) => res.json())
       .then((res) => console.log(res));
-  }
-
-  function handleChange(event) {
-    setState({ [event.target.name]: event.target.value });
-  }
-  function handleCheckboxChange(event) {
-    if (state[event.target.name] !== undefined) {
-      setState({
-        [event.target.name]: [...state[event.target.name], event.target.value],
-      });
-    }
-    setState({
-      [event.target.name]: [event.target.value],
-    });
-  }
+  };
 
   return (
     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto header">
@@ -53,7 +36,10 @@ export const Form = ({ data }) => {
             <CardTitle className="text-center">
               <h1>{title.replace("_", " ")}</h1>
             </CardTitle>
-            <BootstrapForm className="form-signin">
+            <BootstrapForm
+              onSubmit={handleSubmit(onSubmit)}
+              className="form-signin"
+            >
               {subSections.map((subSection) => {
                 const [subTitle, ...elements] = subSection;
                 return (
@@ -79,26 +65,11 @@ export const Form = ({ data }) => {
                               <FormLabel>{label}:</FormLabel>
                             </CardText>
                             <BootstrapForm.Control
-                              onChange={handleChange}
+                              ref={register()}
                               as="input"
                               name={label}
                               type={type}
                             />
-                          </BootstrapForm.Group>
-                        );
-                      }
-
-                      if (
-                        !(
-                          type === "radio" ||
-                          type === "checkbox" ||
-                          type === "select"
-                        )
-                      ) {
-                        return (
-                          <BootstrapForm.Group key={label}>
-                            <FormLabel>{label}</FormLabel>
-                            <BootstrapForm.Control as="input" type={type} />
                           </BootstrapForm.Group>
                         );
                       }
@@ -116,8 +87,9 @@ export const Form = ({ data }) => {
                                     <BootstrapForm.Check
                                       key={option}
                                       type="radio"
-                                      onChange={handleChange}
+                                      ref={register()}
                                       label={option}
+                                      value={option}
                                       name={label}
                                     />
                                   ))}
@@ -134,10 +106,11 @@ export const Form = ({ data }) => {
                                   {options.map((option) => (
                                     <BootstrapForm.Check
                                       key={option}
-                                      onChange={handleCheckboxChange}
-                                      type="checkbox"
-                                      label={option}
                                       name={label}
+                                      ref={register()}
+                                      type="checkbox"
+                                      value={option}
+                                      label={option}
                                     />
                                   ))}
                                 </Col>
@@ -151,7 +124,7 @@ export const Form = ({ data }) => {
                                 <FormLabel>{label}:</FormLabel>
                                 <BootstrapForm.Control
                                   name={label}
-                                  onChange={handleChange}
+                                  ref={register()}
                                   as="select"
                                 >
                                   {options.map((option) => (
@@ -171,7 +144,7 @@ export const Form = ({ data }) => {
                 );
               })}
               <ButtonToggle
-                onClick={handleSubmit}
+                type="submit"
                 className="offset-9"
                 size="md"
                 color="primary"
