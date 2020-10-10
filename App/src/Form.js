@@ -52,6 +52,11 @@ export const Form = ({ data }) => {
                       const label = element.split(" ")[0].replace("_", " ");
                       const type = element.split(" ")[2];
 
+                      /* const [_, rules] = takeRight(element.split(" "), 2);
+                      const hasRules = /regla/i.exec(_) ? true : false;
+
+                      console.log(rules.split("-")); */
+
                       if (
                         !(
                           type === "radio" ||
