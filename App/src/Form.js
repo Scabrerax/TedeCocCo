@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import "./Form.css";
 import { useForm } from "react-hook-form";
+import { takeRight } from "lodash-es";
+import { parseRules } from "./utils";
 
 export const Form = ({ data }) => {
   const [title, ...subSections] = data;
@@ -52,10 +54,11 @@ export const Form = ({ data }) => {
                       const label = element.split(" ")[0].replace("_", " ");
                       const type = element.split(" ")[2];
 
-                      /* const [_, rules] = takeRight(element.split(" "), 2);
+                      const [_, rulesString] = takeRight(element.split(" "), 2);
                       const hasRules = /regla/i.exec(_) ? true : false;
-
-                      console.log(rules.split("-")); */
+                      const rulesObject = hasRules
+                        ? parseRules(rulesString.split("-"))
+                        : undefined;
 
                       if (
                         !(
@@ -70,7 +73,7 @@ export const Form = ({ data }) => {
                               <FormLabel>{label}:</FormLabel>
                             </CardText>
                             <BootstrapForm.Control
-                              ref={register()}
+                              ref={register(rulesObject)}
                               as="input"
                               name={label}
                               type={type}
@@ -79,7 +82,11 @@ export const Form = ({ data }) => {
                         );
                       }
 
-                      const options = element.split(" ").slice(4);
+                      const options = hasRules
+                        ? element
+                            .split(" ")
+                            .slice(4, element.split(" ").length - 2)
+                        : element.split(" ").slice(4);
 
                       switch (type) {
                         case "radio":
@@ -92,7 +99,7 @@ export const Form = ({ data }) => {
                                     <BootstrapForm.Check
                                       key={option}
                                       type="radio"
-                                      ref={register()}
+                                      ref={register(rulesObject)}
                                       label={option}
                                       value={option}
                                       name={label}
@@ -112,7 +119,7 @@ export const Form = ({ data }) => {
                                     <BootstrapForm.Check
                                       key={option}
                                       name={label}
-                                      ref={register()}
+                                      ref={register(rulesObject)}
                                       type="checkbox"
                                       value={option}
                                       label={option}
@@ -129,7 +136,7 @@ export const Form = ({ data }) => {
                                 <FormLabel>{label}:</FormLabel>
                                 <BootstrapForm.Control
                                   name={label}
-                                  ref={register()}
+                                  ref={register(rulesObject)}
                                   as="select"
                                 >
                                   {options.map((option) => (
