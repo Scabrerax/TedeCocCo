@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { ErrorMessage } from '@hookform/error-message';
 import { Col, Form as BootstrapForm, FormLabel } from "react-bootstrap";
 import {
   Card,
@@ -16,7 +17,7 @@ import { parseRules } from "./utils";
 export const Form = ({ data }) => {
   const [title, ...subSections] = data;
 
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, errors, register } = useForm();
   const onSubmit = async (data) => {
     fetch("http://localhost:9000/submit", {
       method: "put",
@@ -76,8 +77,11 @@ export const Form = ({ data }) => {
                               ref={register(rulesObject)}
                               as="input"
                               name={label}
-                              type={type}
+                              type={type} 
                             />
+                            <div className="errorsito">
+                              <ErrorMessage errors={errors} name={label} message={(errors[label])} />
+                            </div>
                           </BootstrapForm.Group>
                         );
                       }

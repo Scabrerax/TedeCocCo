@@ -1,7 +1,7 @@
 const rules = {
-  "*": { required: true },
-  ">": (minLength) => ({ minLength: Number.parseInt(minLength) }),
-  "<": (maxLength) => ({ maxLength: Number.parseInt(maxLength) }),
+  "*": { required: "*Campo Requerido" },
+  ">": (minLength) => ({ minLength:{value: Number.parseInt(minLength), message: `*Minima longitud ${minLength} caracteres`} }),
+  "<": (maxLength) => ({ maxLength:{value: Number.parseInt(maxLength), message: `*Maxima longitud ${maxLength} caracteres`} }),
 };
 
 export const parseRules = (rulesArray) =>
