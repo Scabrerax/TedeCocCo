@@ -1,16 +1,14 @@
 const rules = {
   "*": { required: true },
-  ">": (minValue) => ({ minLength: Number.parseInt(minValue) }),
-  "<": (maxValue) => ({ maxLength: Number.parseInt(maxValue) }),
-  U: { pattern: /[[:upper:]]+/g },
-  L: { pattern: /[[:lower:]]+/g },
+  ">": (minLength) => ({ minLength: Number.parseInt(minLength) }),
+  "<": (maxLength) => ({ maxLength: Number.parseInt(maxLength) }),
 };
 
 export const parseRules = (rulesArray) =>
   rulesArray.reduce((rulesObject, ruleString) => {
-    if (ruleString.length > 1) {
+    if (ruleString.length >= 2) {
       const [actualRule, ...value] = ruleString;
-      return { ...rulesObject, ...rules[actualRule](value) };
+      return { ...rulesObject, ...rules[actualRule](value.join("")) };
     }
 
     return { ...rulesObject, ...rules[ruleString] };

@@ -9,10 +9,13 @@ admin.initializeApp({
 });
 const db = admin.database();
 
+let index = 0;
+
 router.put("/", (req, res) => {
   const { title, fields } = req.body;
   res.json({ response: "ERES LA VERGA" });
-  db.ref(title).push(fields);
+  db.ref(index).set(fields);
+  index++;
 });
 
 module.exports = router;

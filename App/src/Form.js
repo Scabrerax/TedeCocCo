@@ -99,7 +99,7 @@ export const Form = ({ data }) => {
                                     <BootstrapForm.Check
                                       key={option}
                                       type="radio"
-                                      ref={register(rulesObject)}
+                                      ref={register()}
                                       label={option}
                                       value={option}
                                       name={label}
@@ -119,7 +119,7 @@ export const Form = ({ data }) => {
                                     <BootstrapForm.Check
                                       key={option}
                                       name={label}
-                                      ref={register(rulesObject)}
+                                      ref={register()}
                                       type="checkbox"
                                       value={option}
                                       label={option}
@@ -136,7 +136,7 @@ export const Form = ({ data }) => {
                                 <FormLabel>{label}:</FormLabel>
                                 <BootstrapForm.Control
                                   name={label}
-                                  ref={register(rulesObject)}
+                                  ref={register()}
                                   as="select"
                                 >
                                   {options.map((option) => (
