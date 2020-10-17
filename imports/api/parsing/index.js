@@ -157,8 +157,8 @@ function ordenar(array) {
       if (
         subFila[1] === "Tiene" ||
         subFila[1] === "tiene" ||
-        fila[1] === "regla" ||
-        fila[1] === "Regla"
+        subFila[1] === "regla" ||
+        subFila[1] === "Regla"
       ) {
         for (let k = 2; k < subFila.length; k++) {
           let nietos = subFila[k];
