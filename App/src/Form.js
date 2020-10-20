@@ -28,7 +28,7 @@ export const Form = ({ data }) => {
       body: JSON.stringify({ name: title, fields: data }),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => alert('Tus datos fueron enviados'));
   };
 
   return (
