@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      fetch("https://tedecoco-ff7a7.firebaseio.com/.json")
+        .then((res) => res.json())
+        .then((data) => {
+          let contador = 1;
+          let formulario = "FORMULARIO: ";
+          let titulo = "Formularios";
+          let tituloPestaña = "Formularios";
+          document.write("<h1>" + titulo + "</h1>");
+          document.write(
+            "<link rel= stylesheet type= text/css href= forms.css>"
+          );
+          document.title = tituloPestaña;
+          document.write("<center>");
+
+          for (let i in data) {
+            document.write("<table border 2>");
+            document.write(
+              "<tr><td>" + formulario + "</td><td>" + contador + "</td></tr>"
+            );
+
+            for (j in data[i]) {
+              document.write(
+                "<tr><td>" + j + ": " + "</td><td>" + data[i][j] + "</td></tr>"
+              );
+            }
+
+            contador++;
+            document.write("</table>");
+            document.write("<br>");
+          }
+
+          document.write("</center>");
+        });
+    </script>
+  </body>
+</html>
