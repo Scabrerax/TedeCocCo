@@ -1,0 +1,29 @@
+table {
+  background-color: white;
+  text-align: left;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td {
+  padding: 5px;
+  width: 50%;
+}
+
+body {
+  background: linear-gradient(to right, #27282c, #04243a);
+}
+
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+tr:hover td {
+  background-color: #27282c;
+  color: white;
+}
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 60px;
+}
