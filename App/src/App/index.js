@@ -1,10 +1,10 @@
 import React from "react";
-import { Form } from "./Form";
+import { Form } from "../Components/Form";
 import { Container } from "react-bootstrap";
-import data from "./config.json";
+import jsonGeneratedData from "../config.json";
 
 export const App = () => (
   <Container>
-    <Form data={data} />
+    <Form data={jsonGeneratedData} />
   </Container>
 );
