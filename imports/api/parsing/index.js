@@ -47,10 +47,7 @@ function sacarComponentes(indice, objetos, listaLineas) {
   if (
     objetos[id][10] === "select" ||
     objetos[id][10] === "radio" ||
-    objetos[id][10] === "checkbox" ||
-    objetos[id][10] === "text" ||
-    objetos[id][10] === "email" ||
-    objetos[id][10] === "password"
+    objetos[id][10] === "checkbox"
   ) {
     let nombreComponente = "";
     let hijos = [];
@@ -90,10 +87,7 @@ function sacarComponentes(indice, objetos, listaLineas) {
       if (
         objetos[parseInt(hijos[i][j])][10] === "select" ||
         objetos[parseInt(hijos[i][j])][10] === "radio" ||
-        objetos[parseInt(hijos[i][j])][10] === "checkbox" ||
-        objetos[parseInt(hijos[i][j])][10] === "text" ||
-        objetos[parseInt(hijos[i][j])][10] === "email" ||
-        objetos[parseInt(hijos[i][j])][10] === "password"
+        objetos[parseInt(hijos[i][j])][10] === "checkbox"
       ) {
         select = true;
       }
@@ -164,10 +158,13 @@ function ordenar(array) {
           let nietos = subFila[k];
           let subIndice = buscar(nietos, array);
           ordenado[i].push(array[subIndice][0]);
+          array[subIndice] = "None";
         }
       }
     }
+    array[indice] = "None";
   }
+
   let tituloModificado = ordenado[0];
   let palabra = "";
   for (let i = 2; i < tituloModificado.length; i++) {
