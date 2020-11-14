@@ -84,7 +84,10 @@ export const Form = ({ data }) => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: title, fields: data }),
+      body: JSON.stringify({
+        name: title,
+        fields: { ...data, tituloDeFormulario: title },
+      }),
     }).then(() => alert("Tus datos fueron enviados"));
   };
 

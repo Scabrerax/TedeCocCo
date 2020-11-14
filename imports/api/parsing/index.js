@@ -47,7 +47,13 @@ function sacarComponentes(indice, objetos, listaLineas) {
   if (
     objetos[id][10] === "select" ||
     objetos[id][10] === "radio" ||
-    objetos[id][10] === "checkbox"
+    objetos[id][10] === "checkbox" ||
+    objetos[id][10] === "text" ||
+    objetos[id][10] === "email" ||
+    objetos[id][10] === "password" ||
+    objetos[id][10] === "textarea" ||
+    objetos[id][10] === "date" ||
+    objetos[id][10] === "number"
   ) {
     let nombreComponente = "";
     let hijos = [];
@@ -87,7 +93,13 @@ function sacarComponentes(indice, objetos, listaLineas) {
       if (
         objetos[parseInt(hijos[i][j])][10] === "select" ||
         objetos[parseInt(hijos[i][j])][10] === "radio" ||
-        objetos[parseInt(hijos[i][j])][10] === "checkbox"
+        objetos[parseInt(hijos[i][j])][10] === "checkbox" ||
+        objetos[parseInt(hijos[i][j])][10] === "text" ||
+        objetos[parseInt(hijos[i][j])][10] === "email" ||
+        objetos[parseInt(hijos[i][j])][10] === "password" ||
+        objetos[parseInt(hijos[i][j])][10] === "textarea" ||
+        objetos[parseInt(hijos[i][j])][10] === "date" ||
+        objetos[parseInt(hijos[i][j])][10] === "number"
       ) {
         select = true;
       }
