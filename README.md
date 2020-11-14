@@ -2,7 +2,7 @@
 
 Este grupo es para el proyecto de Teoria de la Compilacion y la Computación
 
-# INTEGRANTES
+# Integrantes
 
 - Eduardo Santos Ruiz
 - Sebastian Giraldo Villegas
